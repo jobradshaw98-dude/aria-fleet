@@ -1,0 +1,15 @@
+{
+  "//": "Drop this into your Claude Code settings.json (~/.claude/settings.json) to wire the retrieval hook. It runs on every prompt and injects relevant memories before the model answers. Adjust the path to where you cloned this repo.",
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$HOME/aria/memory-system/hooks/memory-retrieve.py\""
+          }
+        ]
+      }
+    ]
+  }
+}
