@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  apply-engine:
+    name: apply-engine tests
+    runs-on: windows-latest          # matches dev env; requirements include pywin32
+    defaults:
+      run:
+        working-directory: apply-engine
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Install Playwright browser
+        run: python -m playwright install chromium
+      - name: Run test suite
+        run: python -m pytest tests/ -q
+
+  memory-system:
+    name: memory-system smoke test
+    runs-on: ubuntu-latest           # pure stdlib, no deps
+    defaults:
+      run:
+        working-directory: memory-system/hooks
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Link graph builds cleanly (0 dangling, 0 isolated)
+        run: |
+          out=$(python memory_linkmap.py)
+          echo "$out"
+          echo "$out" | grep -q "isolated: 0" || { echo "isolated nodes present"; exit 1; }
+          echo "$out" | grep -q "dangling links: 0" || { echo "dangling links present"; exit 1; }
+      - name: Retrieval returns a link-walked hit
+        run: |
+          out=$(python memory-retrieve.py "how does helios auth handle secrets")
+          echo "$out"
+          echo "$out" | grep -q "linked via" || { echo "link-walk did not fire"; exit 1; }
