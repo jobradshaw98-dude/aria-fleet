@@ -71,6 +71,12 @@ aria/
 └── apply-engine/            showcase 2 — automation engine + test suite
 ```
 
+## Build your own
+
+The reusable structure behind ARIA — the CLAUDE.md cascade, shared data hub, memory
+hook, and scheduled-task pattern — is extracted as a clean starter you can clone:
+**[claude-code-starter](https://github.com/jobradshaw98-dude/claude-code-starter)**.
+
 ## A note on scope & privacy
 
 The live system includes more agents (finance, research/intel, ops, QA, and the
