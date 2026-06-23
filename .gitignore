@@ -1,0 +1,40 @@
+# ── Secrets & credentials (NEVER commit) ───────────────────────────
+*.env
+.env*
+*_config.json
+brief_config.json
+outreach_config.json
+credentials.json
+*credentials*.json
+secrets.json
+*.secret
+*.key
+*.pem
+service_account*.json
+
+# ── Personal / runtime data ────────────────────────────────────────
+data/
+**/data/
+applicant_profile.json          # real PII — only the .example is tracked
+voice_profile.md                # real personal voice file — only .example tracked
+*_live*.out
+profile/                        # browser auth/session dirs
+chrome/
+
+# ── Python ─────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+
+# ── OS / editor ────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
