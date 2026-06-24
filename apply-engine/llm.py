@@ -13,11 +13,10 @@ LEDGER = CAREER_DIR / "claims_ledger.md"
 VOICE = config.PKG_DIR / "voice_profile.md"         # identity + craft (style, not facts)
 CAPABILITIES = config.PKG_DIR / "capabilities.md"   # truthful Yes/No + AI-native coding framing
 RESUME_RULES_FILE = config.PKG_DIR / "resume_rules.md"  # learned resume/deck rules (/career-learn)
-# Identity bedrock — the unfakeable themes Sam uses in high-stakes positioning. A live session
-# always has this (it's recalled from memory); the headless drafter never did, which is a big part
-# of why its essays read generic. Feed it FIRST so the drafter writes from who Sam actually is.
-NARRATIVE = (config.ARIA_DATA.parent.parent / ".claude" / "projects"
-             / "C--Users-jobra-projects-aria" / "memory" / "user_authentic_narrative.md")
+# Identity bedrock — the unfakeable themes the applicant writes high-stakes positioning FROM.
+# User-supplied and optional; feed it FIRST so the drafter writes from who the applicant is rather
+# than generic boilerplate. Read only if present (see the load_facts guards below).
+NARRATIVE = config.PKG_DIR / "narrative.md"
 
 
 def load_facts(job: dict = None, max_chars: int = 200000, recon_brief: str = "") -> str:
@@ -165,14 +164,14 @@ def make_claude_llm(model: str = "sonnet"):
     return _fn
 
 
-# Memory buckets the agents may reach into (read-only): project + global ARIA memory, plus the
-# career writing bank. Scoped via --add-dir so an agent can grep Sam's narrative / past letters
-# without being handed the whole disk.
-_MEMORY_PROJECT = (config.ARIA_DATA.parent.parent / ".claude" / "projects"
-                   / "C--Users-jobra-projects-aria" / "memory")
-_MEMORY_GLOBAL = (config.ARIA_DATA.parent.parent / ".claude" / "projects"
-                  / "C--Users-jobra" / "memory")
-_WRITING_BANK = Path.home() / "ARIA-Vault" / "knowledge" / "career"
+# Optional extra grounding the agents may grep (read-only), scoped via --add-dir so an agent can
+# read past letters / narrative / notes without being handed the whole disk. All optional and
+# git-ignored: drop files in apply-engine/corpus/ to enable, or leave it absent (each path is added
+# only if it exists, see the d.exists() filters below).
+_CORPUS = config.PKG_DIR / "corpus"
+_WRITING_BANK = _CORPUS / "writing-bank"
+_MEMORY_PROJECT = _CORPUS / "memory"
+_MEMORY_GLOBAL = _CORPUS / "memory-global"
 
 # Read-only tool floor every agent gets. Mutating + shell tools are HARD-denied so a guarded agent
 # can never write, edit, or run commands — it can only read/search and (for recon) browse.
