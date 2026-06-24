@@ -60,6 +60,9 @@ python -m venv .venv
 .venv/bin/python -m pip install -r requirements.txt && .venv/bin/python -m pytest tests/ -q
 ```
 
+> A standalone, installable version — with an added profile-driven résumé + cover-letter
+> generator — lives in its own repo: **[job-apply-engine](https://github.com/jobradshaw98-dude/job-apply-engine)**.
+
 ## Repository layout
 
 ```
@@ -74,8 +77,8 @@ aria/
 ## Build your own
 
 The reusable structure behind ARIA — the CLAUDE.md cascade, shared data hub, memory
-hook, and scheduled-task pattern — is extracted as a clean starter you can clone:
-**[claude-code-starter](https://github.com/jobradshaw98-dude/claude-code-starter)**.
+hook, and scheduled-task pattern — is extracted as a clean starter scaffold (available on
+request).
 
 ## A note on scope & privacy
 
@@ -88,6 +91,6 @@ included; see [`docs/architecture.md`](docs/architecture.md) for the full pictur
 ## About
 
 Built by Jordan Bradshaw — an R&D / simulation engineer (FEA, design optimization)
-who builds AI agent systems to multiply engineering work. ARIA is where the two meet.
+who builds multi-agent AI systems that do real work autonomously. ARIA is the largest of them.
 
 License: [MIT](LICENSE).
