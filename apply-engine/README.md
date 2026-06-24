@@ -1,7 +1,7 @@
 # Apply Engine — stage-to-brink form automation
 
 [![CI](https://github.com/jobradshaw98-dude/aria-fleet/actions/workflows/ci.yml/badge.svg)](https://github.com/jobradshaw98-dude/aria-fleet/actions/workflows/ci.yml)
-&nbsp;**1,057 tests** · **~74% line coverage** · offline, no API key needed
+&nbsp;**940 offline tests** · **~68% line coverage** · no API key, network, or browser needed
 
 A headless engine that drives multi-step web application forms across several
 backends, fills every field from a structured profile, drafts free-text answers
@@ -55,7 +55,7 @@ recoverable, and concurrent runs are merge-safe.
 
 ## Test suite
 
-**1,057 tests passing, ~74% line coverage** (offline — no API key, network, or
+**940 tests passing offline, ~68% line coverage** (offline — no API key, network, or
 browser needed; the suite parses HTML fixtures of real ATS forms). Run it:
 
 ```bash
@@ -67,6 +67,11 @@ python -m venv .venv
 # reproduce the coverage figure:
 .venv/Scripts/python.exe -m pytest tests/ --cov=. -q
 ```
+
+Two opt-in groups are deselected by `pytest.ini` (they need host resources CI lacks):
+**117 browser tests** (`-m browser`, drive a live Chromium-family browser) and
+**15 LLM tests** (`-m llm`, shell out to the real `claude` CLI). Run them explicitly
+on a suitable host with `pytest tests/ -m browser` or `-m llm`.
 
 `requirements.txt` marks `pywin32` (a Windows-only dependency of the live browser
 layer) with an environment marker, so `pip install -r requirements.txt` works on
