@@ -1,6 +1,6 @@
 # Apply Engine — stage-to-brink form automation
 
-[![CI](https://github.com/jobradshaw98-dude/aria/actions/workflows/ci.yml/badge.svg)](https://github.com/jobradshaw98-dude/aria/actions/workflows/ci.yml)
+[![CI](https://github.com/jobradshaw98-dude/aria-fleet/actions/workflows/ci.yml/badge.svg)](https://github.com/jobradshaw98-dude/aria-fleet/actions/workflows/ci.yml)
 &nbsp;**1,057 tests** · **~74% line coverage** · offline, no API key needed
 
 A headless engine that drives multi-step web application forms across several

@@ -1,6 +1,8 @@
-# ARIA — a personal multi-agent AI system
+# ARIA — Adaptive Reasoning Information Agents
 
-[![CI](https://github.com/jobradshaw98-dude/aria/actions/workflows/ci.yml/badge.svg)](https://github.com/jobradshaw98-dude/aria/actions/workflows/ci.yml)
+*A personal multi-agent AI system.*
+
+[![CI](https://github.com/jobradshaw98-dude/aria-fleet/actions/workflows/ci.yml/badge.svg)](https://github.com/jobradshaw98-dude/aria-fleet/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ARIA is a fleet of specialized AI agents that run on a schedule, share one source
