@@ -12,7 +12,8 @@ hand — and to learn, by building, how to architect production systems *of* AI
 agents rather than one-off prompts.
 
 It runs daily. This repository is a curated, sanitized slice of it: the
-architecture, plus two self-contained subsystems you can actually run.
+architecture, plus a self-contained subsystem you can run here — and the automation
+engine, which grew into its own repo, [career-engine](https://github.com/jobradshaw98-dude/career-engine).
 
 ![ARIA overview](docs/diagrams/1A-overview-simple.png)
 
@@ -31,7 +32,8 @@ Full design: **[docs/architecture.md](docs/architecture.md)**.
 
 ## What you can run here
 
-Two subsystems are extracted with **synthetic data** so they run on their own:
+A subsystem is extracted with **synthetic data** so it runs on its own; the automation
+engine that was also showcased here has since moved to its own repo:
 
 ### 🧠 [`memory-system/`](memory-system) — question-aware memory retrieval
 A deterministic, **zero-LLM** retrieval layer (~40 ms over the demo corpus) that
@@ -45,25 +47,14 @@ python memory-retrieve.py "how does helios auth handle secrets"
 # returns the auth note directly AND link-walks to the oauth-setup + secrets notes
 ```
 
-### 📨 [`apply-engine/`](apply-engine) — multi-stage automation with real gates
-A headless engine that drives web forms across several backends (with a generic
-fallback), drafts content with quality gates, and stages output to a final-review
-brink — it never submits on its own. Demonstrates adapter patterns, deterministic
-submit-gates, work-authorization policy enforcement, and a **1,057-test suite at
-74% coverage**. All identity/data here is a fictional sample applicant.
+### 📨 `apply-engine/` — moved to its own repo
+The headless multi-ATS automation engine — adapter patterns, deterministic submit-gates,
+work-authorization policy, and a 1,000+ test suite — now lives as a standalone, installable
+project, expanded into the full **source → qualify → build → apply → engage** pipeline:
 
-```bash
-cd apply-engine
-python -m venv .venv
+> **→ [career-engine](https://github.com/jobradshaw98-dude/career-engine)** (formerly `job-apply-engine`).
 
-# Windows:
-.venv/Scripts/python.exe -m pip install -r requirements.txt && .venv/Scripts/python.exe -m pytest tests/ -q
-# macOS/Linux (pywin32 auto-skips via an environment marker; offline suite still runs):
-.venv/bin/python -m pip install -r requirements.txt && .venv/bin/python -m pytest tests/ -q
-```
-
-> A standalone, installable version — with an added profile-driven résumé + cover-letter
-> generator — lives in its own repo: **[job-apply-engine](https://github.com/jobradshaw98-dude/job-apply-engine)**.
+All identity/data there is a fictional sample applicant. It never submits on its own.
 
 ## Repository layout
 
@@ -72,8 +63,8 @@ aria/
 ├── docs/
 │   ├── architecture.md      system design + diagrams
 │   └── diagrams/            architecture diagrams (PNG)
-├── memory-system/           showcase 1 — retrieval hook + demo corpus
-└── apply-engine/            showcase 2 — automation engine + test suite
+├── memory-system/           retrieval hook + demo corpus
+└── apply-engine/            → moved to its own repo: career-engine
 ```
 
 ## Build your own
@@ -86,8 +77,8 @@ request).
 
 The live system includes more agents (finance, research/intel, ops, QA, and the
 supervisor) and connects to real personal data. Those are intentionally **not**
-published — this repo is a sanitized showcase of the architecture and the two
-subsystems that stand on their own. No secrets, credentials, or personal data are
+published — this repo is a sanitized showcase of the architecture and the memory
+subsystem that stands on its own (the automation engine lives at career-engine). No secrets, credentials, or personal data are
 included; see [`docs/architecture.md`](docs/architecture.md) for the full picture.
 
 ## About
